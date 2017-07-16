@@ -49,11 +49,7 @@
     <!--whether the device supports screen effect-->
     <bool name="support_screen_effect">true</bool>
     <!--which screen effect options should be show-->
-    <integer name="screen_effect_supported">3</integer>
-    <!--0:not support 1:close gamut 2:close ce-->
-    <integer name="screen_standard_mode">0</integer>
-    <!--screen saturation, vivid or standard-->
-    <integer name="display_ce">11</integer>
+    <integer name="screen_effect_supported">6</integer>
     <!--whether the device supports wapi-->
     <bool name="support_wapi">true</bool>
     <!--whether the device is mediatek-->
@@ -85,7 +81,7 @@
     <!--whether the device supports steps_provider-->
     <bool name="support_steps_provider">false</bool>
     <!--whether the device support hall sensor-->
-    <bool name="support_hall_sensor">true</bool>
+    <bool name="support_hall_sensor">false</bool>
     <!--whether the device supports hifi-->
     <bool name="support_hifi">false</bool>
     <!--whether the device supports agps parameters-->
@@ -93,7 +89,7 @@
     <!--whether the device supports agps roaming-->
     <bool name="support_agps_roaming">false</bool>
     <!--whether the device supports IR-->
-    <bool name="support_ir">true</bool>
+    <bool name="support_ir">false</bool>
     <!-- whether the device supports app hiding-->
     <bool name="support_app_hiding">false</bool>
     <!--whether the device can read cpu4 freq-->
@@ -138,6 +134,8 @@
     <bool name="support_object_track">true</bool>
     <!--whether support 4k recording in camera-->
     <bool name="support_camera_4k_quality">true</bool>
+	<!--whether support refocus feature in camera-->
+    <bool name="support_camera_ubifocus">true</bool>
     <!--whether support audio focus recording in camera-->
     <bool name="support_camera_audio_focus">true</bool>
     <!--whether use morpho lib in camera-->
@@ -153,7 +151,7 @@
     <!--whether freeze preview after hdr capture in camera-->
     <bool name="is_camera_freeze_after_hdr_capture">false</bool>
     <!--whether set orientation info for face detection in camera-->
-    <bool name="is_camera_face_detection_need_orientation">false</bool>
+    <bool name="is_camera_face_detection_need_orientation">true</bool>
     <!--whether hold blured background for effects preview in camera-->
     <bool name="is_camera_hold_blur_background">false</bool>
     <!--whether support peaking mf in camera-->
@@ -170,10 +168,16 @@
     <bool name="support_camera_tilt_shift">true</bool>
     <!--whether support magic mirror in camera-->
     <bool name="support_camera_magic_mirror">true</bool>
+	<!--whether support groupshot mode  in camera-->
+    <bool name="support_camera_groupshot">true</bool>
+    <!--whether support raw mode  in camera-->
+    <bool name="support_camera_raw">false</bool>
+    <!--whether support fisheye mode  in camera-->
+    <bool name="support_camera_fish_eye">true</bool>
     <!--whether support snap with screen off  in camera-->
-    <bool name="support_camera_quick_snap">false</bool>
+    <bool name="support_camera_quick_snap">true</bool>
     <!--whether the device supports preset music-->
-    <bool name="support_preset_music">false</bool>
+    <bool name="support_preset_music">true</bool>
     <!--whether compass support tilt rotate calibrate  -->
     <bool name="support_rotate_calibrate">false</bool>
     <!--whether the device supports smart cover with small window-->
@@ -186,23 +190,29 @@
     <bool name="support_show_basic_items">true</bool>
     <!--the vendor feature, it's value may be qcom,mediatek,leadcore or nvidia-->
     <string name="vendor">qcom</string>
+    <!-- The URL that should be sent in an x-wap-profile header with an HTTP request,
+     as defined in the Open Mobile Alliance User Agent Profile specification
+     OMA-TS-UAProf-V2_0-20060206-A Section 8.1.1.1. If the URL contains a '%s'
+     format string then that substring will be replaced with the value of
+     Build.MODEL. The format string shall not be escaped. -->
+    <string name="config_useragentprofile_url">http://apkupdate.miui.com/other/X3W_UAprofile.xml</string>
     <!--Flag of reduce preview size in camera(1:reduce, 0:do not reduce; 1st byte:rear camera, 2nd byte:front camera, 3rd byte:rear video, 4th byte:front video )-->
     <integer name="camera_reduce_preview_flag">14</integer>
     <!--max number of burst images one time -->
     <integer name="burst_shoot_count">100</integer>
-    <!--Successful flag of camera continuous auto focus  result-->
-    <integer name="camera_focus_success_flag">1</integer>
     <!--b0:flash b1:hdr b2:motion b3:night-->
     <integer name="camera_supported_asd">1</integer>
-    <!--max cpu freq of the device-->
-    <integer name="cpu_max_freq">250</integer>
+    <!--screen saturation, vivid or standard-->
+    <integer name="display_ce">11</integer>
     <!--total steps number of camera compensation-->
     <float name="camera_exposure_compensation_steps_num">12.0</float>
     <!--Left margin of count down parent layout for front camera-->
-    <float name="camera_front_count_down_margin">0.7246</float>
+    <float name="camera_front_count_down_margin">0.3817</float>
+    <!--NFC related-->
+    <bool name="support_se_route">true</bool>
     <!-- adb reboot bootloader lock -->
     <bool name="support_bootloader_lock">true</bool>
     <!--support nfc search -->
-    <bool name="support_nfc">false</bool>
+    <bool name="support_nfc">true</bool>
     <bool name="support_audio_loopback">true</bool>
 </features>
