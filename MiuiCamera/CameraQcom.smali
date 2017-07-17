@@ -1795,7 +1795,7 @@
 
     .line 69
     :cond_17
-    const-string v3, "denoise-on"
+    const-string v3, "denoise-off"
 
     goto/16 :goto_3
 

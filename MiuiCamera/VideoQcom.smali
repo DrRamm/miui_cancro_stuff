@@ -558,7 +558,7 @@
 
     iget-object v3, p0, Lcom/android/camera/camera_adapter/VideoQcom;->mParameters:Landroid/hardware/Camera$Parameters;
 
-    const-string v4, "denoise-on"
+    const-string v4, "denoise-off"
 
     invoke-virtual {v2, v3, v4}, Lcom/android/camera/hardware/QcomCameraProxy;->setDenoise(Landroid/hardware/Camera$Parameters;Ljava/lang/String;)V
 
