@@ -33,7 +33,7 @@
     <!--whether the device supports stereo record-->
     <bool name="support_stereo_record">true</bool>
     <!--whether the device supports screen paper mode-->
-    <bool name="support_screen_paper_mode">true</bool>
+    <bool name="support_screen_paper_mode">false</bool>
     <!--whether the device supports led light-->
     <bool name="support_led_light">true</bool>
     <!--whether the device supports button light-->
@@ -135,7 +135,7 @@
     <!--whether support 4k recording in camera-->
     <bool name="support_camera_4k_quality">true</bool>
 	<!--whether support refocus feature in camera-->
-    <bool name="support_camera_ubifocus">true</bool>
+    <bool name="support_camera_ubifocus">false</bool>
     <!--whether support audio focus recording in camera-->
     <bool name="support_camera_audio_focus">true</bool>
     <!--whether use morpho lib in camera-->

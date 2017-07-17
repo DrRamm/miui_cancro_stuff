@@ -139,7 +139,7 @@
     <!--whether support 4k recording in camera-->
     <bool name="support_camera_4k_quality">true</bool>
 	<!--whether support refocus feature in camera-->
-	<bool name="support_camera_ubifocus">true</bool>
+	<bool name="support_camera_ubifocus">false</bool>
     <!--whether support audio focus recording in camera-->
     <bool name="support_camera_audio_focus">true</bool>
     <!--whether use morpho lib in camera-->
