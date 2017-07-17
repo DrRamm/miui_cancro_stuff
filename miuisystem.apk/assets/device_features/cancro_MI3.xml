@@ -125,7 +125,7 @@
     <!--whether taking lower size effect image in camera-->
     <bool name="is_lower_size_effect">false</bool>
     <!--whether support aohdr in camera-->
-    <bool name="support_camera_aohdr">true</bool>
+    <bool name="support_camera_aohdr">false</bool>
     <!--whether support high frame recording in camera-->
     <bool name="support_camera_hfr">true</bool>
     <!--whether support chroma flash in camera-->
@@ -201,7 +201,7 @@
     <!--max number of burst images one time -->
     <integer name="burst_shoot_count">100</integer>
     <!--b0:flash b1:hdr b2:motion b3:night-->
-    <integer name="camera_supported_asd">1</integer>
+    <integer name="camera_supported_asd">0</integer>
     <!--screen saturation, vivid or standard-->
     <integer name="display_ce">11</integer>
     <!--total steps number of camera compensation-->
