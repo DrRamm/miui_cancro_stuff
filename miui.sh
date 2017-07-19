@@ -162,7 +162,7 @@ echo "Запаковка в финальный архив"
 
 cd $MIUI_FOLDER
 MY="drramm_"
-$MY=$MY$F
+MY=$MY$F
 
 echo "Архив $MY"
 zip -rqq $MY
