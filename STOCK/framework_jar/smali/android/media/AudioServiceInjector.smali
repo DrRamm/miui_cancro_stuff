@@ -136,7 +136,7 @@
 
     .line 123
     :cond_c
-    const/16 v1, 0x23
+    const/16 v1, 0xf
 
     aput v1, p0, v0
 
