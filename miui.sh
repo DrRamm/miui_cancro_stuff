@@ -27,8 +27,11 @@ if [ ! -f $F ] || [ -z "$F" ]; then
         exit 1 
 fi
 
-echo "Очистка $TEMP_RECOMPILE_FOLDER"
-rm -rf $TEMP_RECOMPILE_FOLDER/*
+DATE_START=$(date +"%s")
+
+echo "Очистка временных папок"
+rm -rf $TEMP_RECOMPILE_FOLDER
+rm -rf $MIUI_FOLDER
 
 echo "Получение папок для патчей"
 
@@ -55,8 +58,7 @@ for ((i=1; i <= $COUNT_FOLDERS; i ++))
 		eval $GIT_INIT
 		eval $GIT_ADD	
 
-		cp -r $MOD_FOLDER/$CURRENT_FOLDER $TEMP_PATCH_FOLDER/ 
-		#cd $TEMP_PATCH_FOLDER
+		cp -r $MOD_FOLDER/$CURRENT_FOLDER $TEMP_PATCH_FOLDER/		
 		git diff > $PATCH_FOLDER/$CURRENT_FOLDER
 		rm -rf *
 		eval $GIT_ADD
@@ -165,8 +167,12 @@ MY="drramm_"
 MY=$MY$F
 
 echo "Архив $MY"
-zip -rqq $MY
+zip -rqq ../$MY *
 
 cd $GIT_FOLDER
 
 echo "Готово..."
+
+DATE_END=$(date +"%s")
+DIFF=$(($DATE_END - $DATE_START))
+echo "Время: $(($DIFF / 60)) минут и $(($DIFF % 60)) секунд."
