@@ -41,7 +41,9 @@ mkdir -p $TEMP_PATCH_FOLDER
 cd $TEMP_PATCH_FOLDER
 
 echo "Обновление патчей"
+echo
 mkdir -p $PATCH_FOLDER
+
 
 for ((i=1; i <= $COUNT_FOLDERS; i ++))
 	do	
@@ -60,8 +62,10 @@ for ((i=1; i <= $COUNT_FOLDERS; i ++))
 		eval $GIT_ADD
 		eval $GIT_RESET
 	done
+
 cd $GIT_FOLDER
 
+echo
 echo "Распаковка $F в $MIUI_FOLDER"
 unzip -qq $F -d $MIUI_FOLDER
 
@@ -69,11 +73,12 @@ echo "Удаление звуков UI"
 rm -rf $MIUI_SYSTEM/media/audio/ui
 
 echo "Копирование папки $GIT_FOLDER/system/etc в $MIUI_SYSTEM"
+echo
 cp -r $GIT_FOLDER/system/etc $MIUI_SYSTEM
 
 cd $PATCH_FOLDER
 COUNT_PATCHES="$(ls -1q | wc -l)"
-echo "Найдено патчей: $COUNT_PATCHES "
+echo "Создано патчей: $COUNT_PATCHES "
 
 echo "Наложение патчей..."
 for ((i=1; i <= $COUNT_PATCHES; i++))
@@ -148,7 +153,20 @@ for ((i=1; i <= $COUNT_PATCHES; i++))
 			cd $PATCH_FOLDER
 
 			echo "Готово"
+			echo
 		fi
 
 done
+
+echo "Запаковка в финальный архив"
+
+cd $MIUI_FOLDER
+MY="drramm_"
+$MY=$MY$F
+
+echo "Архив $MY"
+zip -rqq $MY
+
+cd $GIT_FOLDER
+
 echo "Готово..."
