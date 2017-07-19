@@ -50,7 +50,8 @@ for ((i=1; i <= $COUNT_FOLDERS; i ++))
 		echo $CURRENT_FOLDER
 		echo $TEMP_PATCH_FOLDER
 		cp -r $STOCK_FOLDER/$CURRENT_FOLDER $TEMP_PATCH_FOLDER/
-		eval $GIT_ADD
+		cd $TEMP_PATCH_FOLDER
+		eval $GIT_ADD	
 
 		cp -r $MOD_FOLDER/$CURRENT_FOLDER $TEMP_PATCH_FOLDER/ 
 		cd $TEMP_PATCH_FOLDER
@@ -59,11 +60,10 @@ for ((i=1; i <= $COUNT_FOLDERS; i ++))
 		eval $GIT_ADD
 		eval $GIT_RESET
 	done
-
 cd $GIT_FOLDER
 
 echo "Распаковка miui в $MIUI_FOLDER"
-#unzip $F -d $MIUI_FOLDER
+unzip $F -d $MIUI_FOLDER
 
 echo "Удаление звуков UI"
 rm -rf $MIUI_SYSTEM/media/audio/ui
