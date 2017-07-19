@@ -7,6 +7,7 @@ GIT_FOLDER=~/miui_cancro_stuff
 TEMP_RECOMPILE_FOLDER=~/miui_recomp_temp
 
 PATCH_FOLDER=$GIT_FOLDER/patches
+TEMP_PATCH_FOLDER=$TEMP_RECOMPILE_FOLDER/shit
 
 STOCK_FOLDER=$GIT_FOLDER/STOCK
 MOD_FOLDER=$GIT_FOLDER/MOD
@@ -16,6 +17,10 @@ APP=$MIUI_SYSTEM/app
 PRIV_APP=$MIUI_SYSTEM/priv-app
 
 TEMP_SMALI_FOLDER=smali
+
+GIT_ADD="git add ."
+GIT_INIT="git init"
+GIT_RESET="git reset --hard"
 
 if [ ! -f $F ] || [ -z "$F" ]; then
         echo "Используйте $0 <file>"
@@ -30,12 +35,31 @@ COUNT_FOLDERS="$(ls -l | grep -c ^d)"
 
 echo "Найдено папок: $COUNT_FOLDERS"
 
+mkdir -p $TEMP_PATCH_FOLDER
+cd $TEMP_PATCH_FOLDER
+
+eval $GIT_INIT
+
 echo "Обновление патчей"
+rm -rf $PATCH_FOLDER/*
+
 for ((i=1; i <= $COUNT_FOLDERS; i ++))
-	do
-		CURRENT_FOLDER="$(ls | sort -n | head -n $i | tail -n 1)"		
-		diff -Naur $CURRENT_FOLDER $MOD_FOLDER/$CURRENT_FOLDER > $PATCH_FOLDER/$CURRENT_FOLDER
+	do	
+		cd $STOCK_FOLDER
+		CURRENT_FOLDER="$(ls | sort -n | head -n $i | tail -n 1)"
+		echo $CURRENT_FOLDER
+		echo $TEMP_PATCH_FOLDER
+		cp -r $STOCK_FOLDER/$CURRENT_FOLDER $TEMP_PATCH_FOLDER/
+		eval $GIT_ADD
+
+		cp -r $MOD_FOLDER/$CURRENT_FOLDER $TEMP_PATCH_FOLDER/ 
+		cd $TEMP_PATCH_FOLDER
+		git diff > $PATCH_FOLDER/$CURRENT_FOLDER
+		rm -rf *
+		eval $GIT_ADD
+		eval $GIT_RESET
 	done
+
 cd $GIT_FOLDER
 
 echo "Распаковка miui в $MIUI_FOLDER"
