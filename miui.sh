@@ -74,10 +74,13 @@ for ((i=1; i <= $COUNT_PATCHES; i++))
 			cd $TEMP_RECOMPILE_FOLDER/$CURRENT_PATCH
 
 			echo "Распаковка classes.dex"
-			#baksmali d classes.dex -o $TEMP_SMALI_FOLDER
+			baksmali d classes.dex -o $TEMP_SMALI_FOLDER
 
 			echo "Запаковка classes.dex"
-			#smali a $TEMP_SMALI_FOLDER -o classes.dex
+			smali a $TEMP_SMALI_FOLDER -o classes.dex
+			
+			echo "Применение патча $CURRENT_PATCH с $PATCH_FOLDER"
+			patch -pi $CURRENT_PATCH 
 
 			rm -rf $TEMP_SMALI_FOLDER
 
