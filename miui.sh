@@ -6,13 +6,14 @@ F=$1
 
 PREFFIX_FOR_ZIP="drramm_"
 
-MIUI_FOLDER=~/miui_unpacked
-GIT_FOLDER=~/miui_cancro_stuff
-TEMP_RECOMPILE_FOLDER=~/miui_recomp_temp
+MIUI_FOLDER=$PWD/../miui_unpacked
+GIT_FOLDER=$PWD
+TEMP_RECOMPILE_FOLDER=$PWD/../miui_recomp_temp
 
 PATCH_FOLDER=$TEMP_RECOMPILE_FOLDER/patches
 TEMP_PATCH_FOLDER=$TEMP_RECOMPILE_FOLDER/another_temp_folder
 PATCH_PREBUILT_FOLDER=$GIT_FOLDER/patches
+PREBUILT_FLAG=yes
 
 STOCK_FOLDER=$GIT_FOLDER/STOCK
 MOD_FOLDER=$GIT_FOLDER/MOD
@@ -32,30 +33,44 @@ if [ ! -f $F ] || [ -z "$F" ]; then
         exit 1 
 fi
 
-
-
-echo "Очистка временных папок"
-rm -rf $TEMP_RECOMPILE_FOLDER
-rm -rf $MIUI_FOLDER
-
-function unzip_rom {
-	echo
-	echo "Распаковка $F в $MIUI_FOLDER"
-	unzip -qq $F -d $MIUI_FOLDER
+clean_all () {
+	echo "Очистка временных папок"
+	rm -rf $TEMP_RECOMPILE_FOLDER
+	rm -rf $MIUI_FOLDER
 }
 
-function remove_ui_sounds {
+unzip_rom () {
+	FILE=$1
+	echo
+	echo "Распаковка $FILE в $MIUI_FOLDER"
+	unzip -qq $FILE -d $MIUI_FOLDER
+}
+
+zip_rom () {
+	FILE=$1
+	echo
+	echo "Запаковка в финальный архив"
+
+	cd $MIUI_FOLDER
+
+	PREFFIX_FOR_ZIP=$PREFFIX_FOR_ZIP$FILE
+
+	echo "Архив $PREFFIX_FOR_ZIP"
+	zip -rqq ../$PREFFIX_FOR_ZIP *
+}
+
+remove_ui_sounds () {
 	echo "Удаление звуков UI"
 	rm -rf $MIUI_SYSTEM/media/audio/ui
 }
 
-funtion copy_etc {
+copy_etc () {
 	echo "Копирование папки $GIT_FOLDER/system/etc в $MIUI_SYSTEM"
 	echo
 	cp -r $GIT_FOLDER/system/etc $MIUI_SYSTEM
 }
 
-function update_patches {
+update_patches () {
 
 	echo "Получение папок для патчей"
 
@@ -71,8 +86,8 @@ function update_patches {
 	echo "Обновление патчей на основе разницы STOCK и MOD"
 	mkdir -p $PATCH_FOLDER
 
-	for ((i=1; i <= $COUNT_FOLDERS; i ++))
-		do	
+	i=1
+	while [ "$i" -le "$COUNT_FOLDERS" ]; do
 			cd $STOCK_FOLDER
 			CURRENT_FOLDER="$(ls | sort -n | head -n $i | tail -n 1)"
 			echo $CURRENT_FOLDER		
@@ -86,6 +101,8 @@ function update_patches {
 			rm -rf *
 			eval $GIT_ADD
 			eval $GIT_RESET
+			sleep 10
+			i=$(( i + 1 ))
 		done
 
 	cd $PATCH_FOLDER
@@ -95,19 +112,20 @@ function update_patches {
 	echo "Создано патчей: $COUNT_PATCHES "
 }
 
-function apply_patches {
+apply_patches () {
 
-	$IS_PREBUILT_PATCH=$1
-	if [$IS_PREBUILT_PATCH == 1]
+	IS_PREBUILT_PATCH=$1
+	echo $IS_PREBUILT_PATCH
+	if [ "$IS_PREBUILT_PATCH" == "$PREBUILT_FLAG" ]
 	then 
-		$PATCH_FOLDER=$PATCH_PREBUILT_FOLDER
+		PATCH_FOLDER=$PATCH_PREBUILT_FOLDER
 	fi
 
 	cd $PATCH_FOLDER
 	COUNT_PATCHES="$(ls -1q | wc -l)"
 	echo "Наложение патчей..."
-	for ((i=1; i <= $COUNT_PATCHES; i++))
-		do
+	i=1
+	while [ "$i" -le "$COUNT_PATCHES" ]; do
 			CURRENT_PATCH="$(ls | sort -n | head -n $i | tail -n 1)"
 			echo
 			echo "Патч [$i/$COUNT_PATCHES]"
@@ -176,94 +194,105 @@ function apply_patches {
 				cd $PATCH_FOLDER
 
 				echo "Готово"
-			fi	
+			fi
+
+			sleep 10
+			i=$(( i + 1 ))	
 	done
 
-	if [$IS_PREBUILT_PATCH == 1]
+	if [ "$IS_PREBUILT_PATCH" == "$PREBUILT_FLAG" ]
 	then 
-		$PATCH_FOLDER=$TEMP_RECOMPILE_FOLDER/patches
+		PATCH_FOLDER=$TEMP_RECOMPILE_FOLDER/patches
 	fi
 }
 
-function zip_rom {
-	echo "Запаковка в финальный архив"
+while true
+do	
+	echo
+	echo
+	echo "0 - Очистка временных папок"
+	echo "1 - Распаковка архива"
+	echo "2 - Обновление патчей на разнице MOD/STOCK"
+	echo "3 - Применение патчей на разнице MOD/STOCK"
+	echo "4 - Применение патчей из папки patches"
+	echo "5 - Удаление звуков UI"
+	echo "6 - Копирование папки etc"
+	echo "7 - Запаковка архива"
+	echo "8 - 0 1 4 5 6 7"
+	echo
+	echo "9 - выход"
+	while read -p "Выберите:" cchoice
+	do
+	case "$cchoice" in
+		0 )
+			clean_all
+			echo		
+			break
+			;;
 
-	cd $MIUI_FOLDER
+		1 )
+			unzip_rom $F
+			echo		
+			break
+			;;
+		2 )
+			update_patches
+			echo		
+			break
+			;;
+		3 )	
+			apply_patches no
+			echo
+			break
+			;;
+		4 )	
+			apply_patches yes
+			echo
+			break
+			;;
+		5 )	
+			remove_ui_sounds
+			echo
+			break
+			;;
+		6 )	
+			copy_etc
+			echo
+			break
+			;;
+		7 )	
+			zip_rom $F
+			echo
+			break
+			;;
+		8 )	
+			unzip_rom $F
+			apply_patches yes
+			remove_ui_sounds
+			copy_etc
+			zip_rom $F
+			echo
+			break
+			;;
+		9 )	
+			exit
+			break
+			;;
+		* )
+			echo
+			echo "Что-то пошло не так"
+			echo
+			;;
+	esac
+	done
 
-	PREFFIX_FOR_ZIP=$PREFFIX_FOR_ZIP$F
+	echo "Готово..."
 
-	echo "Архив $PREFFIX_FOR_ZIP"
-	zip -rqq ../$PREFFIX_FOR_ZIP *
-}
+	DATE_END=$(date +"%s")
+	DIFF=$(($DATE_END - $DATE_START))
+	echo "Время: $(($DIFF / 60)) минут и $(($DIFF % 60)) секунд."
 
-echo "0 - Распаковка архива"
-echo "1 - Обновление патчей на разнице MOD/STOCK"
-echo "2 - Применение патчей на разнице MOD/STOCK"
-echo "3 - Применение патчей из папки patches"
-echo "4 - Удаление звуков UI"
-echo "5 - Копирование папки etc"
-echo "6 - Запаковка архива"
-echo "7 - 0 3 4 5 6"
-
-while read -p "Выберите:" cchoice
-do
-case "$cchoice" in
-	0 )
-		unzip_rom
-		echo		
-		break
-		;;
-	1 )
-		update_patches
-		echo		
-		break
-		;;
-	2 )	
-		apply_patches 0
-		echo
-		break
-		;;
-	3 )	
-		apply_patches 1
-		echo
-		break
-		;;
-	4 )	
-		remove_ui_sounds
-		echo
-		break
-		;;
-	5 )	
-		copy_etc
-		echo
-		break
-		;;
-	6 )	
-		zip_rom
-		echo
-		break
-		;;
-	7 )	
-		unzip_rom
-		apply_patches 1
-		remove_ui_sounds
-		copy_etc
-		zip_rom
-		echo
-		break
-		;;
-	* )
-		echo
-		echo "Что!то пошло не так"
-		echo
-		;;
-esac
+	cd $GIT_FOLDER
 done
 
-echo "Готово..."
 
-DATE_END=$(date +"%s")
-DIFF=$(($DATE_END - $DATE_START))
-echo "Время: $(($DIFF / 60)) минут и $(($DIFF % 60)) секунд."
-
-cd $GIT_FOLDER
