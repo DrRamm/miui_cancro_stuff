@@ -1,0 +1,102 @@
+diff --git a/assets/device_features/cancro_MI3.xml b/assets/device_features/cancro_MI3.xml
+index 13e6d62..faa071f 100644
+--- a/assets/device_features/cancro_MI3.xml
++++ b/assets/device_features/cancro_MI3.xml
+@@ -129,13 +129,15 @@
+     <!--whether support high frame recording in camera-->
+     <bool name="support_camera_hfr">true</bool>
+     <!--whether support chroma flash in camera-->
+-    <bool name="support_chroma_flash">false</bool>
++    <bool name="support_chroma_flash">true</bool>
+     <!--whether support object tracking in camera-->
+     <bool name="support_object_track">true</bool>
+     <!--whether support 4k recording in camera-->
+-    <bool name="support_camera_4k_quality">false</bool>
++    <bool name="support_camera_4k_quality">true</bool>
++	<!--whether support refocus feature in camera-->
++    <bool name="support_camera_ubifocus">false</bool>
+     <!--whether support audio focus recording in camera-->
+-    <bool name="support_camera_audio_focus">false</bool>
++    <bool name="support_camera_audio_focus">true</bool>
+     <!--whether use morpho lib in camera-->
+     <bool name="is_camera_use_morpho_lib">true</bool>
+     <!--whether replace a lower cost effect to avoid preview lag-->
+@@ -143,13 +145,13 @@
+     <!--whether support manual focus/exposure_time in camera-->
+     <bool name="support_camera_manual_function">true</bool>
+     <!--whether capture when user press down the shutter in camera instead of left the shutter-->
+-    <bool name="support_camera_press_down_capture">false</bool>
++    <bool name="support_camera_press_down_capture">true</bool>
+     <!--whether support capture in torch mode in camera-->
+     <bool name="support_camera_torch_capture">true</bool>
+     <!--whether freeze preview after hdr capture in camera-->
+     <bool name="is_camera_freeze_after_hdr_capture">false</bool>
+     <!--whether set orientation info for face detection in camera-->
+-    <bool name="is_camera_face_detection_need_orientation">false</bool>
++    <bool name="is_camera_face_detection_need_orientation">true</bool>
+     <!--whether hold blured background for effects preview in camera-->
+     <bool name="is_camera_hold_blur_background">false</bool>
+     <!--whether support peaking mf in camera-->
+@@ -166,10 +168,16 @@
+     <bool name="support_camera_tilt_shift">true</bool>
+     <!--whether support magic mirror in camera-->
+     <bool name="support_camera_magic_mirror">true</bool>
++	<!--whether support groupshot mode  in camera-->
++    <bool name="support_camera_groupshot">true</bool>
++    <!--whether support raw mode  in camera-->
++    <bool name="support_camera_raw">false</bool>
++    <!--whether support fisheye mode  in camera-->
++    <bool name="support_camera_fish_eye">true</bool>
+     <!--whether support snap with screen off  in camera-->
+-    <bool name="support_camera_quick_snap">false</bool>
++    <bool name="support_camera_quick_snap">true</bool>
+     <!--whether the device supports preset music-->
+-    <bool name="support_preset_music">false</bool>
++    <bool name="support_preset_music">true</bool>
+     <!--whether compass support tilt rotate calibrate  -->
+     <bool name="support_rotate_calibrate">false</bool>
+     <!--whether the device supports smart cover with small window-->
+@@ -179,7 +187,7 @@
+     <!--whether show my device-->
+     <bool name="support_my_device">true</bool>
+     <!--whether show basic info items-->
+-    <bool name="support_show_basic_items">false</bool>
++    <bool name="support_show_basic_items">true</bool>
+     <!--the vendor feature, it's value may be qcom,mediatek,leadcore or nvidia-->
+     <string name="vendor">qcom</string>
+     <!-- The URL that should be sent in an x-wap-profile header with an HTTP request,
+diff --git a/assets/device_features/cancro_MI4.xml b/assets/device_features/cancro_MI4.xml
+index 5bed489..42a4d62 100644
+--- a/assets/device_features/cancro_MI4.xml
++++ b/assets/device_features/cancro_MI4.xml
+@@ -138,6 +138,8 @@
+     <bool name="support_object_track">true</bool>
+     <!--whether support 4k recording in camera-->
+     <bool name="support_camera_4k_quality">true</bool>
++	<!--whether support refocus feature in camera-->
++	<bool name="support_camera_ubifocus">false</bool>
+     <!--whether support audio focus recording in camera-->
+     <bool name="support_camera_audio_focus">true</bool>
+     <!--whether use morpho lib in camera-->
+@@ -153,7 +155,7 @@
+     <!--whether freeze preview after hdr capture in camera-->
+     <bool name="is_camera_freeze_after_hdr_capture">false</bool>
+     <!--whether set orientation info for face detection in camera-->
+-    <bool name="is_camera_face_detection_need_orientation">false</bool>
++    <bool name="is_camera_face_detection_need_orientation">true</bool>
+     <!--whether hold blured background for effects preview in camera-->
+     <bool name="is_camera_hold_blur_background">false</bool>
+     <!--whether support peaking mf in camera-->
+@@ -170,6 +172,12 @@
+     <bool name="support_camera_tilt_shift">true</bool>
+     <!--whether support magic mirror in camera-->
+     <bool name="support_camera_magic_mirror">true</bool>
++	<!--whether support groupshot mode  in camera-->
++    <bool name="support_camera_groupshot">true</bool>
++    <!--whether support raw mode  in camera-->
++    <bool name="support_camera_raw">false</bool>
++    <!--whether support fisheye mode  in camera-->
++    <bool name="support_camera_fish_eye">true</bool>
+     <!--whether support snap with screen off  in camera-->
+     <bool name="support_camera_quick_snap">false</bool>
+     <!--whether the device supports preset music-->
