@@ -85,12 +85,10 @@ index ea89864..f2146ac 100644
  .field mAccelerometerDefault:Z
  
  .field mAccessibilityManager:Landroid/view/accessibility/AccessibilityManager;
-@@ -1231,7 +1239,14 @@
-     invoke-direct {v0, p0}, Lcom/android/server/policy/PhoneWindowManager$ScreenLockTimeout;-><init>(Lcom/android/server/policy/PhoneWindowManager;)V
+@@ -1232,6 +1240,13 @@
  
      iput-object v0, p0, Lcom/android/server/policy/PhoneWindowManager;->mScreenLockTimeout:Lcom/android/server/policy/PhoneWindowManager$ScreenLockTimeout;
--
-+	
+ 	
 +	new-instance v0, Lcom/android/server/policy/PhoneWindowManager$MusicNext; 
 +    invoke-direct {v0, p0}, Lcom/android/server/policy/PhoneWindowManager$MusicNext;-><init>(Lcom/android/server/policy/PhoneWindowManager;)V 
 +    iput-object v0, p0, Lcom/android/server/policy/PhoneWindowManager;->mVolumeUpLongPress:Ljava/lang/Runnable; 
