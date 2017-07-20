@@ -1,3 +1,16 @@
+diff --git a/smali/android/media/AudioServiceInjector.smali b/smali/android/media/AudioServiceInjector.smali
+index a1a415d..6d86c4e 100644
+--- a/smali/android/media/AudioServiceInjector.smali
++++ b/smali/android/media/AudioServiceInjector.smali
+@@ -136,7 +136,7 @@
+ 
+     .line 123
+     :cond_c
+-    const/16 v1, 0xf
++    const/16 v1, 0x23
+ 
+     aput v1, p0, v0
+ 
 diff --git a/smali/android/media/IAudioService$Stub$Proxy.smali b/smali/android/media/IAudioService$Stub$Proxy.smali
 index 4468655..7462454 100644
 --- a/smali/android/media/IAudioService$Stub$Proxy.smali

@@ -1,7 +1,34 @@
 diff --git a/smali/com/android/server/audio/AudioService.smali b/smali/com/android/server/audio/AudioService.smali
-index c73ed33..57d3ecb 100644
+index c73ed33..6a51748 100644
 --- a/smali/com/android/server/audio/AudioService.smali
 +++ b/smali/com/android/server/audio/AudioService.smali
+@@ -594,16 +594,16 @@
+ 
+     :array_64
+     .array-data 4
+-        0x5
+-        0x7
+-        0x7
+-        0xf
+-        0x7
+-        0x7
+-        0xf
+-        0x7
+-        0xf
+-        0xf
++        0x23
++        0x23
++        0x23
++        0x23
++        0x23
++        0x23
++        0x23
++        0x23
++        0x23
++        0x23
+     .end array-data
+ 
+     .line 310
 @@ -20336,3 +20336,36 @@
      .line 958
      return-void
